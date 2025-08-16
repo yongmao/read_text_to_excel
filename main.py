@@ -1,4 +1,4 @@
-# This is a sample Python script.
+# 读text文件，再导入到excel
 from datetime import datetime
 
 # Press ⌃R to execute it or replace it with your code.
