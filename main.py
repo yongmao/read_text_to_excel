@@ -131,6 +131,9 @@ def import_data():
     delimiters = [':', '：']
     df = pd.read_excel('./wxbg.xlsx',sheet_name='微信出车报告')
 
+    df.iloc[2, 2] = "yes"
+    df.to_excel('./wxbg.xlsx',sheet_name='微信出车报告',columns=['导入'], index=False)
+
     # 写文件
     existing_file = './ccjl.xlsx'
     df_existing = pd.read_excel(existing_file, sheet_name='出车报告')
