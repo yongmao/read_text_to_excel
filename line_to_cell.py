@@ -16,6 +16,7 @@ def std_date(datestr):
     else:
         return datestr
 
+'''
 # 以1为起点
 def parse(line:str):
     cell_init = ()
@@ -116,7 +117,91 @@ def parse(line:str):
             case _:
                 print("===" + key)
     return cell
+'''
 
+def parse(line:str):
+    cell_init = ()
+    cell = ()
+
+    line_std = line.replace("：",":").strip()
+    line_tuple = line_std.partition(":")
+    if line_tuple[1] == ":":
+        key = line_tuple[0].strip()
+        value = line_tuple[2].strip()
+        
+        if key == "ID":
+            cell = cell_init + (1,)
+        elif key == "客户" or key == "客人" or key == "乘客姓名" or key == "联系人" or key == "客人姓名" or key == "接机牌":
+            cell = cell_init + (2,)
+            cell = cell + (value,)
+        elif key == "用车时间" or key == "日期" or key == "出车日期":
+            cell = cell_init + (3,)
+            cell = cell + (std_date(value),)
+        elif key == "司机" or key == "姓名" or key == "师傅" or key == "服务司机" or key == "司机姓名" or key == "出车司机":
+            cell = cell_init + (4,)
+            cell = cell + (value,)
+        elif key == "电话" or key == "手机" or key == "司机电话":
+            cell = cell_init + (5,)
+            cell = cell + (value,)
+        elif key == "车型" or key == "车子" or key == "车辆型号":
+            cell = cell_init + (6,)
+            cell = cell + (value,)
+        elif key == "车型"  or  key == "车子" or  key == "车辆型号":
+            cell = cell_init + (6,)
+            cell = cell + (value,)
+        elif key == "车号" or key == "车牌" or key == "车牌号码":
+            cell = cell_init + (7,)
+            cell = cell + (value,)
+        elif key == "用车地点" or key == "城市" or key == "用车地":
+            cell = cell_init + (8,)
+            cell = cell + (value,)
+        elif key == "行程" or key == "出车行程" or key == "路线" or key == "用车行程":
+            cell = cell_init + (9,)
+            cell = cell + (value,)
+        elif key == "Time" or key == "时间" or key == "起止时间":
+            cell = cell_init + (10,)
+            cell = cell + (value,)
+        elif key == "用车时长":
+            cell = cell_init + (11,)
+            cell = cell + (value,)
+        elif key == "超出小时":
+            cell = cell_init + (12,)
+            cell = cell + (value,)
+        elif key == "行车里程" or key == "行驶" or key == "行驶里程" or key == "公里" or key == "里程" or key == "行驶公里":
+            cell = cell_init + (13,)
+            # 公里
+            cell = cell + (value.split("公里")[0],)
+        elif key == "超公里数":
+            cell = cell_init + (14,)
+            cell = cell + (value,)
+        elif key == "OK":
+            cell = cell_init + (15,)
+            cell = cell + (value.split("元")[0],)
+        elif key == "OT超时":
+            cell = cell_init + (16,)
+            cell = cell + (value.split("元")[0],)
+        elif key == "停车费" or key == "停车" or key == "停车费用":
+            cell = cell_init + (17,)
+            cell = cell + (value.split("元")[0],)
+        elif key == "高速费" or key == "高速" or key == "高速费用":
+            cell = cell_init + (18,)
+            cell = cell + (value.split("元")[0],)
+        elif key == "餐费"  or  key == "歺补":
+            cell = cell_init + (19,)
+            cell = cell + (value.split("元")[0],)
+            # 人数 人数：2位
+            # 航班信息：CZ346, 13:40
+            # 举牌子：Avakova Karine （给卡丽娜）
+            # 接机牌：Mr.Mads.GyIdenberg
+            # 起点：首都机场T3
+            # 终点：世贸工三国际公寓
+            # 联系人：待定
+            # 餐厅地址：黄浦区圆明园路88号益外滩源2楼西侧201
+            # 过路费：11元
+      
+        else:
+            print("*** [" + key + "] 没有处理！")
+    return cell
 
 
 if __name__ == '__main__':
